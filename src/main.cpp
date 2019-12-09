@@ -25,6 +25,7 @@ int main()
         int n = 0;
 
         auto add = [&](auto& ctx) { n += _attr(ctx); };
+        auto mul = [&](auto& ctx) { n *= _attr(ctx); };
 
         bool r = parse(toParse.begin(), 
                     toParse.end(), 
@@ -32,13 +33,20 @@ int main()
                         // BEGIN GRAMMAR
 
                     int_[add] >> 
-                    *(
+                    *((
                         *char_(' ') >>
                         char_('+') >> 
                         *char_(' ') >> 
                         int_[add]
                     )
-
+                    |
+                    (
+                        *char_(' ') >>
+                        char_('*') >> 
+                        *char_(' ') >> 
+                        int_[mul]
+                    )
+                    )
                         // END GRAMMAR
 
                     );
