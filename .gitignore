@@ -2,4 +2,5 @@
 build/
 .vscode/
 
+# file generated
 include/version.hpp

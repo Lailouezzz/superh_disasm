@@ -42,10 +42,7 @@ message("bin dir : ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 # generate version.hpp
 configure_file(${SRC_DIR}/version.hpp.in ${INCLUDE_DIR}/version.hpp)
 
-# list headers and sources file
-include_directories(${INCLUDE_DIR})
+# list sources file and add include dir
 file(GLOB_RECURSE SRCS ${SRC_DIR}/*.cpp)
-file(GLOB_RECURSE HDRS ${INCLUDE_DIR}/*.hpp)
-
-# final executable
-add_executable(SuperH_disasm ${SRCS} ${HDRS})
+add_executable(SuperH_disasm ${SRCS})
+target_include_directories(SuperH_disasm PRIVATE ${INCLUDE_DIR})
