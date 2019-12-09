@@ -16,4 +16,4 @@ namespace SHD
 
 } /// namespace SHD
 
-#endif
+#endif /// #ifndef H_UTILS

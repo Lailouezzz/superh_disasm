@@ -1,3 +1,5 @@
 # don't track build and .vscode
 build/
 .vscode/
+
+include/version.hpp
