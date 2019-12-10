@@ -1,3 +1,5 @@
+# FIX ME : Boost couldn't find by CMake
+
 sudo: false
 
 language: cpp
