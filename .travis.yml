@@ -10,8 +10,6 @@ addons:
     sources:
       - boost-latest
     packages:
-      - gcc-8
-      - g++-8
       - libboost-all-dev
 
 compiler:
