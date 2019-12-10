@@ -7,6 +7,7 @@ compiler:
 install:
   - sudo apt update -qq
   - sudo apt install -qq libboost-all-dev
+  - export BOOST_ROOT=/usr/local
 
 before_script:
   - mkdir build
