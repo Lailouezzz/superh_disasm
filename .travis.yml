@@ -1,13 +1,22 @@
+sudo: false
+
 language: cpp
+
+cache:
+  apt: true
+
+addons:
+  apt:
+    sources:
+      - boost-latest
+    packages:
+      - gcc-8
+      - g++-8
+      - libboost-all-dev
 
 compiler:
   - gcc
   - clang
-
-install:
-  - sudo apt update -qq
-  - sudo apt install -qq libboost-all-dev
-  - export BOOST_ROOT=/usr/local
 
 before_script:
   - mkdir build
