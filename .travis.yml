@@ -19,6 +19,8 @@ compiler:
 before_script:
   - mkdir build
   - cd build
+  - export Boost_INCLUDE_DIR=/usr/include
+  - export Boost_LIBRARY_DIR=/usr/lib
   - cmake ../
 
 script:
