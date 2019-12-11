@@ -6,31 +6,30 @@
 
 namespace SHD
 {
+    enum class arg_type
+    {
+        IMM,        // #imm
+        RN,         // rn
+        RM,         // rm
+        JUMP8,      // jump8
+        JUMP12,     // jump12
+        PCDISP,     // @(disp, pc)
+        AT_RN,      // @rn
+        AT_RM,      // @rm
+        AT_RNP,     // @rn+
+        AT_RMP,     // @rm+
+        AT_MRN,     // @-rn
+        AT_DRN,     // @(disp, rn)
+        AT_DRM,     // @(disp, rm)
+        AT_R0RN,    // @(r0, rn)
+        AT_R0RM,    // @(r0, rm)
+        AT_DGBR,    // @(disp, gbr)
+        LITERAL,    // literal string
+        NONE        // no arg
+    }; /// enum class arg_type
 
     struct InstructionDescriptor
     {
-
-        enum class arg_type
-        {
-            IMM,        // #imm
-            RN,         // rn
-            RM,         // rm
-            JUMP8,      // jump8
-            JUMP12,     // jump12
-            PCDISP,     // @(disp, pc)
-            AT_RN,      // @rn
-            AT_RM,      // @rm
-            AT_RNP,     // @rn+
-            AT_RMP,     // @rm+
-            AT_MRN,     // @-rn
-            AT_DRN,     // @(disp, rn)
-            AT_DRM,     // @(disp, rm)
-            AT_R0RN,    // @(r0, rn)
-            AT_R0RM,    // @(r0, rm)
-            AT_DGBR,    // @(disp, gbr)
-            LITERAL,   // literal string
-            NONE        // null arg
-        }; /// enum class arg_type
 
         uint16_t opcode_def; // opcode_def & opcode_mask = opcode_def
         uint16_t opcode_mask; // 1 = constant ; 0 = arg
@@ -49,14 +48,14 @@ namespace SHD
         InstructionDescriptor() noexcept;
 
 
-        uint16_t getN(uint16_t const& opcode);    // return n as number
-        uint16_t getM(uint16_t const& opcode);    // return m as number
-        uint16_t getDisp(uint16_t const& opcode); // return disp as number
-        uint16_t getImm(uint16_t const& opcode);  // return imm as number
-        bool isUseN();      // true if n_mask != 0
-        bool isUseM();      // true if m_mask != 0
-        bool isUseDisp();   // true if d_mask != 0
-        bool isUseImm();    // true if i_mask != 0
+        uint16_t getN(uint16_t const& opcode) const;     // return n as number
+        uint16_t getM(uint16_t const& opcode) const;     // return m as number
+        uint16_t getDisp(uint16_t const& opcode) const;  // return disp as number
+        uint16_t getImm(uint16_t const& opcode) const;   // return imm as number
+        bool isUseN() const;      // true if n_mask != 0
+        bool isUseM() const;      // true if m_mask != 0
+        bool isUseDisp() const;   // true if d_mask != 0
+        bool isUseImm() const;    // true if i_mask != 0
 
     }; /// struct instn_def
 

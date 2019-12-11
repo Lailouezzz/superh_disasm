@@ -14,6 +14,25 @@ namespace SHD
         return value;
     }
 
+    template<typename T>
+    constexpr uint8_t posLeastBit(T const& n)
+    {
+        if(n == 0)
+        {
+            // TODO : handle exception when n == 0
+        }
+
+        T selector = 1; // pos = 0
+        for(uint8_t ret = 0; true; ret++)
+        {
+            if((selector & n) != 0) // if have a bit at pos return pos
+            {
+                return ret;
+            }
+            selector <<= 1;
+        }
+    }
+
 } /// namespace SHD
 
 #endif /// #ifndef H_UTILS

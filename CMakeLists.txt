@@ -16,12 +16,12 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 
 # search BOOST
-find_package(Boost 1.60.0)
+find_package(Boost 1.67.0)
 if(Boost_FOUND)
   include_directories(${Boost_INCLUDE_DIRS})
   message("Boost include : ${Boost_INCLUDE_DIRS}")
 else()
-  message(FATAL_ERROR "Boost >= 1.60.0 not found")
+  message(FATAL_ERROR "Boost >= 1.67.0 not found")
 endif()
 
 # check spirit x3
@@ -45,4 +45,7 @@ configure_file(${SRC_DIR}/version.hpp.in ${INCLUDE_DIR}/version.hpp)
 # list sources file and add include dir
 file(GLOB_RECURSE SRCS ${SRC_DIR}/*.cpp)
 add_executable(SuperH_disasm ${SRCS})
+# std::filesystem
+set_property(TARGET SuperH_disasm PROPERTY CXX_STANDARD 17)
+target_link_libraries(SuperH_disasm stdc++fs)
 target_include_directories(SuperH_disasm PRIVATE ${INCLUDE_DIR})

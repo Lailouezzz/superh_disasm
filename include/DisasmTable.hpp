@@ -3,9 +3,14 @@
 #include <vector>
 #include <string>
 #include <cstdint>
+#include <fstream>
+#include <iostream>
+#include <filesystem>
+#include <spiritx3.hpp>
 #include <utils.hpp>
-#include <InstructionDescriptor.hpp>
-#include <Instruction.hpp>
+#include "InstructionDescriptorParser.hpp"
+#include "InstructionDescriptor.hpp"
+#include "Instruction.hpp"
 
 
 namespace SHD
@@ -23,6 +28,8 @@ namespace SHD
         size_t getTableSize() const noexcept { return m_instns.size(); }
         void reset() noexcept { m_instns.clear(); }
         void addInstns(instn_dsc_array tmp_instns);
+
+        bool readFromFile(std::filesystem::path const& filePath);
 
     private:
 

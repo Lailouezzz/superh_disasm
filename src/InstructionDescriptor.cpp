@@ -1,4 +1,4 @@
-#include <InstructionDescriptor.hpp>
+#include "InstructionDescriptor.hpp"
 
 
 namespace SHD
@@ -20,65 +20,65 @@ namespace SHD
     { }
 
 
-    uint16_t InstructionDescriptor::getN(uint16_t const& opcode)
+    uint16_t InstructionDescriptor::getN(uint16_t const& opcode) const
     {
         if(!isUseN())
-            return 16;
+            return 16; // TODO : handle exception
         
         uint16_t ret = opcode & n_mask;
         ret >>= n_pos;
         return ret;
     }
 
-    bool InstructionDescriptor::isUseN()
+    bool InstructionDescriptor::isUseN() const
     {
         return n_mask != 0;
     }
 
 
-    uint16_t InstructionDescriptor::getM(uint16_t const& opcode)
+    uint16_t InstructionDescriptor::getM(uint16_t const& opcode) const
     {
         if(!isUseM())
-            return 16;
+            return 16; // TODO : handle exception
         
         uint16_t ret = opcode & m_mask;
         ret >>= m_pos;
         return ret;
     }
 
-    bool InstructionDescriptor::isUseM()
+    bool InstructionDescriptor::isUseM() const
     {
         return m_mask != 0;
     }
 
 
-    uint16_t InstructionDescriptor::getDisp(uint16_t const& opcode)
+    uint16_t InstructionDescriptor::getDisp(uint16_t const& opcode) const
     {
         if(!isUseDisp())
-            return 16;
+            return 16; // TODO : handle exception
         
         uint16_t ret = opcode & d_mask;
         ret >>= d_pos;
         return ret;
     }
 
-    bool InstructionDescriptor::isUseDisp()
+    bool InstructionDescriptor::isUseDisp() const
     {
         return d_mask != 0;
     }
 
 
-    uint16_t InstructionDescriptor::getImm(uint16_t const& opcode)
+    uint16_t InstructionDescriptor::getImm(uint16_t const& opcode) const
     {
         if(!isUseImm())
-            return 16;
+            return 16; // TODO : handle exception
         
         uint16_t ret = opcode & i_mask;
         ret >>= i_pos;
         return ret;
     }
 
-    bool InstructionDescriptor::isUseImm()
+    bool InstructionDescriptor::isUseImm() const
     {
         return i_mask != 0;
     }

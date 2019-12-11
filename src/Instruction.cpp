@@ -1,4 +1,4 @@
-#include <Instruction.hpp>
+#include "Instruction.hpp"
 
 
 namespace SHD
@@ -21,47 +21,53 @@ namespace SHD
     }
 
 
-    uint16_t Instruction::getN()
+    uint16_t Instruction::getN() const
     {
         return m_descriptor.getN(m_opcode);
     }
 
-    bool Instruction::isUseN()
+    bool Instruction::isUseN() const
     {
         return m_descriptor.isUseN();
     }
 
 
-    uint16_t Instruction::getM()
+    uint16_t Instruction::getM() const
     {
         return m_descriptor.getM(m_opcode);
     }
 
-    bool Instruction::isUseM()
+    bool Instruction::isUseM() const
     {
         return m_descriptor.isUseM();
     }
 
 
-    uint16_t Instruction::getDisp()
+    uint16_t Instruction::getDisp() const
     {
         return m_descriptor.getDisp(m_opcode);
     }
 
-    bool Instruction::isUseDisp()
+    bool Instruction::isUseDisp() const
     {
         return m_descriptor.isUseDisp();
     }
 
 
-    uint16_t Instruction::getImm()
+    uint16_t Instruction::getImm() const
     {
         return m_descriptor.getImm(m_opcode);
     }
 
-    bool Instruction::isUseImm()
+    bool Instruction::isUseImm() const
     {
         return m_descriptor.isUseImm();
+    }
+
+
+    std::string Instruction::toString()
+    {
+        return m_descriptor.mnemonic_name;
     }
 
 } /// namespace SHD
