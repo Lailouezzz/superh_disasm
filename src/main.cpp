@@ -2,6 +2,7 @@
 #include <string>
 #include <spiritx3.hpp>
 #include <DisasmTable.hpp>
+#include <Instruction.hpp>
 #include <utils.hpp>
 #include <version.hpp>
 
@@ -24,6 +25,9 @@ int main()
         return -1;
     }
     
+    SHD::InstructionDescriptor instnDesc = table.matchInstn(0b0010100001001001);
+    SHD::Instruction instn(instnDesc, 0b0010100001001001);
+    std::cout << instn.toString() << std::endl;
 
     return 0;
 }

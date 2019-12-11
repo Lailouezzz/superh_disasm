@@ -10,4 +10,5 @@ namespace spirit
 
 } /// namespace spirit
 
+
 #endif /// #ifndef H_SPIRITX3

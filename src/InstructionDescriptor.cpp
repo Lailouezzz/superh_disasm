@@ -1,3 +1,7 @@
+#include <cstdint>
+#include <string>
+#include <vector>
+#include "ArgumentDescriptor.hpp"
 #include "InstructionDescriptor.hpp"
 
 
@@ -15,8 +19,7 @@ namespace SHD
         m_mask(0),
         d_mask(0),
         i_mask(0),
-        arg1_type(arg_type::NONE),
-        arg2_type(arg_type::NONE)
+        args()
     { }
 
 

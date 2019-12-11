@@ -1,13 +1,14 @@
+#include <cstdint>
+#include <memory>
+#include <vector>
+#include "InstructionDescriptor.hpp"
+#include "Argument.hpp"
+#include "DisasmTable.hpp"
 #include "Instruction.hpp"
 
 
 namespace SHD
 {
-
-    Instruction::Instruction() noexcept :
-        m_descriptor(),
-        m_opcode(0)
-    { }
 
     Instruction::Instruction(InstructionDescriptor const& tmp_instn_descriptor, uint16_t const& tmp_opcode) :
         m_descriptor(tmp_instn_descriptor),
@@ -18,6 +19,27 @@ namespace SHD
         {
             // TODO : handle exception
         }
+
+        for(uint8_t i = 0; i < m_descriptor.args.size(); i++)
+        {
+            m_args.push_back(Argument(std::make_shared<Instruction>(*this), m_descriptor.args[i]));
+        }
+
+    }
+
+
+    std::string Instruction::toString()
+    {
+        std::string ret = m_descriptor.mnemonic_name;
+        ret += '\t';
+        if(m_args.size() >= 1)
+            ret += m_args[0].toString();
+        if(m_args.size() >= 2)
+        {
+            ret += ", ";
+            ret += m_args[1].toString();
+        }
+        return ret;
     }
 
 
@@ -25,49 +47,34 @@ namespace SHD
     {
         return m_descriptor.getN(m_opcode);
     }
-
-    bool Instruction::isUseN() const
-    {
-        return m_descriptor.isUseN();
-    }
-
-
     uint16_t Instruction::getM() const
     {
         return m_descriptor.getM(m_opcode);
     }
-
-    bool Instruction::isUseM() const
-    {
-        return m_descriptor.isUseM();
-    }
-
-
     uint16_t Instruction::getDisp() const
     {
         return m_descriptor.getDisp(m_opcode);
     }
-
-    bool Instruction::isUseDisp() const
-    {
-        return m_descriptor.isUseDisp();
-    }
-
-
     uint16_t Instruction::getImm() const
     {
         return m_descriptor.getImm(m_opcode);
     }
 
+    bool Instruction::isUseN() const
+    {
+        return m_descriptor.isUseN();
+    }
+    bool Instruction::isUseM() const
+    {
+        return m_descriptor.isUseM();
+    }
+    bool Instruction::isUseDisp() const
+    {
+        return m_descriptor.isUseDisp();
+    }
     bool Instruction::isUseImm() const
     {
         return m_descriptor.isUseImm();
-    }
-
-
-    std::string Instruction::toString()
-    {
-        return m_descriptor.mnemonic_name;
     }
 
 } /// namespace SHD

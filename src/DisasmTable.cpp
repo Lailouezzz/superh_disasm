@@ -1,3 +1,13 @@
+#include <vector>
+#include <string>
+#include <cstdint>
+#include <fstream>
+#include <iostream>
+#include <filesystem>
+#include <spiritx3.hpp>
+#include <utils.hpp>
+#include "InstructionDescriptorParser.hpp"
+#include "InstructionDescriptor.hpp"
 #include "DisasmTable.hpp"
 
 
@@ -24,11 +34,25 @@ namespace SHD
                                           );
             
             if(ret)
-                m_instns.push_back(newDesc);
+                m_instnsDesc.push_back(newDesc);
 
         }
 
         return true;
     }
     
+    InstructionDescriptor DisasmTable::matchInstn(uint16_t const& opcode) const
+    {
+
+        for(auto const& idesc : m_instnsDesc)
+        {
+            if((opcode & idesc.opcode_mask) == (idesc.opcode_def & idesc.opcode_mask)) // match
+                return idesc;
+        }
+
+        // TODO : handle exception
+        return InstructionDescriptor();
+
+    }
+
 } /// namespace SHD

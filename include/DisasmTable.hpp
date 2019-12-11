@@ -10,7 +10,6 @@
 #include <utils.hpp>
 #include "InstructionDescriptorParser.hpp"
 #include "InstructionDescriptor.hpp"
-#include "Instruction.hpp"
 
 
 namespace SHD
@@ -25,15 +24,16 @@ namespace SHD
         DisasmTable() = default;
 
 
-        size_t getTableSize() const noexcept { return m_instns.size(); }
-        void reset() noexcept { m_instns.clear(); }
+        size_t getTableSize() const noexcept { return m_instnsDesc.size(); }
+        void reset() noexcept { m_instnsDesc.clear(); }
         void addInstns(instn_dsc_array tmp_instns);
 
         bool readFromFile(std::filesystem::path const& filePath);
+        InstructionDescriptor matchInstn(uint16_t const& opcode) const;
 
     private:
 
-        instn_dsc_array m_instns;
+        instn_dsc_array m_instnsDesc;
 
     }; /// class DisasmTable
 

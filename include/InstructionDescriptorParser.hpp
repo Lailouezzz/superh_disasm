@@ -51,9 +51,8 @@ namespace SHD
         // ALL LAMBDA FOR PARSING
 
         auto reset = [&](auto& ctx) 
-        {           // defaut = NONE
-            _val(ctx).arg1_type = arg_type::NONE;
-            _val(ctx).arg2_type = arg_type::NONE;
+        {           // defaut
+            _val(ctx).args.clear();
         };
         auto set_opcode = [&](auto& ctx)
         { 
@@ -111,17 +110,31 @@ namespace SHD
             }
         };
         auto set_mnemonic = [&](auto& ctx) { _val(ctx).mnemonic_name = _attr(ctx); };
-        auto set_arg1_type = [&](auto& ctx) { _val(ctx).arg1_type = _attr(ctx); };
+        auto set_arg1_type = [&](auto& ctx) 
+        {
+            ArgumentDescriptor tmp;
+            tmp.type = _attr(ctx);
+            _val(ctx).args.push_back(tmp);
+        };
         auto set_arg1_literal = [&](auto& ctx)
         { 
-            _val(ctx).arg1_type = arg_type::LITERAL;
-            _val(ctx).arg1_literal = _attr(ctx);
+            ArgumentDescriptor tmp;
+            tmp.type = arg_type::LITERAL;
+            tmp.arg_literal = _attr(ctx);
+            _val(ctx).args.push_back(tmp);
         };
-        auto set_arg2_type = [&](auto& ctx) { _val(ctx).arg2_type = _attr(ctx); };
+        auto set_arg2_type = [&](auto& ctx) 
+        {
+            ArgumentDescriptor tmp;
+            tmp.type = _attr(ctx);
+            _val(ctx).args.push_back(tmp);
+        };
         auto set_arg2_literal = [&](auto& ctx)
-        { 
-            _val(ctx).arg2_type = arg_type::LITERAL;
-            _val(ctx).arg2_literal = _attr(ctx);
+        {
+            ArgumentDescriptor tmp;
+            tmp.type = arg_type::LITERAL;
+            tmp.arg_literal = _attr(ctx);
+            _val(ctx).args.push_back(tmp);
         };
         
         // RULE
@@ -163,5 +176,6 @@ namespace SHD
     } /// namespace InstructionDescriptorParser
 
 } /// namespace SHD
+
 
 #endif /// #ifndef H_INSTRUCTION_DESCRIPTOR_PARSER

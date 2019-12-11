@@ -2,31 +2,12 @@
 #define H_INSTRUCTIONDESCRIPTOR
 #include <cstdint>
 #include <string>
+#include <vector>
+#include "ArgumentDescriptor.hpp"
 
 
 namespace SHD
 {
-    enum class arg_type
-    {
-        IMM,        // #imm
-        RN,         // rn
-        RM,         // rm
-        JUMP8,      // jump8
-        JUMP12,     // jump12
-        PCDISP,     // @(disp, pc)
-        AT_RN,      // @rn
-        AT_RM,      // @rm
-        AT_RNP,     // @rn+
-        AT_RMP,     // @rm+
-        AT_MRN,     // @-rn
-        AT_DRN,     // @(disp, rn)
-        AT_DRM,     // @(disp, rm)
-        AT_R0RN,    // @(r0, rn)
-        AT_R0RM,    // @(r0, rm)
-        AT_DGBR,    // @(disp, gbr)
-        LITERAL,    // literal string
-        NONE        // no arg
-    }; /// enum class arg_type
 
     struct InstructionDescriptor
     {
@@ -41,8 +22,7 @@ namespace SHD
 
 
         std::string mnemonic_name; // string mnemonic
-        arg_type arg1_type, arg2_type; // type of argument
-        std::string arg1_literal, arg2_literal; // literal arg if arg[number]_type == LITERAL
+        std::vector<ArgumentDescriptor> args; // arguments
 
 
         InstructionDescriptor() noexcept;
