@@ -6,6 +6,7 @@
 #include "InstructionDescriptor.hpp"
 #include "Argument.hpp"
 #include "DisasmTable.hpp"
+#include "BinaryManager.hpp"
 
 
 namespace SHD
@@ -22,7 +23,7 @@ namespace SHD
 
 
         InstructionDescriptor getDescriptor() const { return m_descriptor; }
-        std::vector<Argument> getArgs() const { return m_args; }
+        std::vector<Argument> const& getArgs() const { return m_args; }
         uint16_t getOpcode() const { return m_opcode; }
         std::string toString();
 
@@ -31,6 +32,7 @@ namespace SHD
         InstructionDescriptor m_descriptor; // definition of the instn
         std::vector<Argument> m_args;
         uint16_t m_opcode; // opcode
+        std::shared_ptr<BinaryManager> m_binm;
 
         uint16_t getN() const;     // return n as number
         uint16_t getM() const;     // return m as number

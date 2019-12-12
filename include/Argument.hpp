@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <utils.hpp>
 #include "Instruction.hpp"
 #include "ArgumentDescriptor.hpp"
 

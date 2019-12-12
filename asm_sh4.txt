@@ -1,0 +1,26 @@
+# Instruction decoding table: 'sh4'
+# This table is an extension for SH4 processors. See 'asm-sh3.txt' for details
+# on the format.
+
+0000nnnn01110011  movco.l r0, @rn
+0000mmmm01100011  movli.l @rm, r0
+0100mmmm10101001  movua.l @rm, r0
+0100mmmm11101001  movua.l @rm+, r0
+0000nnnn11000011  movca.l r0, @rn
+
+0000nnnn11100011  icbi    @rn
+0000nnnn10010011  ocbi    @rn
+0000nnnn10100011  ocbp    @rn
+0000nnnn10110011  ocbwb   @rn
+
+0000nnnn11010011  prefi   @rn
+0000000010101011  synco
+
+0100mmmm00111010  ldc     rm, sgr
+0100mmmm11111010  ldc     rm, dbr
+0100mmmm00110110  ldc.l   @rm+, sgr
+0100mmmm11110110  ldc.l   @rm+, dbr
+0000nnnn00111010  stc     sgr, rn
+0000nnnn11111010  stc     dbr, rn
+0100nnnn00110010  stc.l   sgr, @-rn
+0100nnnn11110010  stc.l   dbr, @-rn
