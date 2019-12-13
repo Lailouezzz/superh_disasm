@@ -1,6 +1,11 @@
-# don't track build and .vscode
+# don't track build, out, .vscode and .vs
 build/
+out/
+.vs
 .vscode/
 
 # file generated
 include/version.hpp
+
+# vs config
+CmakeSettings.json

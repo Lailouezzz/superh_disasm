@@ -11,9 +11,15 @@ endif()
 message("build type : ${CMAKE_BUILD_TYPE}")
 
 # C++ flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+# Set default compile flags for GCC
+if(CMAKE_COMPILER_IS_GNUCXX)
+	message(STATUS "GCC detected, adding compile flags")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
+	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+else()
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
 # search BOOST
 find_package(Boost 1.67.0)
@@ -47,5 +53,9 @@ file(GLOB_RECURSE SRCS ${SRC_DIR}/*.cpp)
 add_executable(SuperH_disasm ${SRCS})
 # std::filesystem
 set_property(TARGET SuperH_disasm PROPERTY CXX_STANDARD 17)
-target_link_libraries(SuperH_disasm stdc++fs)
+if(CMAKE_COMPILER_IS_GNUCXX)
+	target_link_libraries(SuperH_disasm stdc++fs)
+endif()
+
+#all project inlucdes
 target_include_directories(SuperH_disasm PRIVATE ${INCLUDE_DIR})
